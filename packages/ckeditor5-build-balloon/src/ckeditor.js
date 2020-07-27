@@ -20,15 +20,28 @@ import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
 import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
 import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
 import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
+import LinkImage from '@ckeditor/ckeditor5-link/src/linkimage';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent';
 import Link from '@ckeditor/ckeditor5-link/src/link';
 import List from '@ckeditor/ckeditor5-list/src/list';
-import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
+// import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
+
+import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
+import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
+import GFMDataProcessor from '@ckeditor/ckeditor5-markdown-gfm/src/gfmdataprocessor';
+
+import InsertImage from '../plugins/insert-image';
+
+// editor.getData();
+// Simple plugin which loads the data processor.
+function Markdown(editor) {
+	editor.data.processor = new GFMDataProcessor(editor.editing.view.document);
+}
 
 export default class BalloonEditor extends BalloonEditorBase {}
 
@@ -39,6 +52,7 @@ BalloonEditor.builtinPlugins = [
 	Autoformat,
 	Bold,
 	Italic,
+	Strikethrough,
 	BlockQuote,
 	CKFinder,
 	EasyImage,
@@ -48,38 +62,101 @@ BalloonEditor.builtinPlugins = [
 	ImageStyle,
 	ImageToolbar,
 	ImageUpload,
+	InsertImage,
+	LinkImage,
 	Indent,
 	Link,
 	List,
-	MediaEmbed,
+	// doesn't work with markdown
+	// MediaEmbed,
 	Paragraph,
 	PasteFromOffice,
 	Table,
 	TableToolbar,
-	TextTransformation
+ 	TextTransformation,
+	CodeBlock,
+	Markdown
 ];
+
+/*
+bold [x]
+italic [x]
+strike through [x]
+link [x]
+ordered list [x]
+unordered list [x]
+header 1,2,3 [x]
+blockquote [x]
+
+image link [x](popup feo, icono repetido)
+image upload
+remove formating
+code
+rtl (right to left)
+
+change language
+tema
+
+makrdown
+marked
+showdown
+https://github.com/ckeditor/ckeditor5/issues/2314
+
+
+Insert image via URL
+https://github.com/ckeditor/ckeditor5/issues/5161
+https://ckeditor.com/docs/ckeditor5/latest/framework/guides/creating-simple-plugin.html#step-4-inserting-a-new-image
+https://github.com/ckeditor/ckeditor5/issues/702
+
+https://ckeditor.com/docs/ckeditor5/latest/builds/guides/development/custom-builds.html
+https://ckeditor.com/docs/ckeditor5/latest/framework/guides/deep-dive/ui/theme-customization.html
+
+https://ckeditor.com/docs/ckeditor5/latest/features/code-blocks.html
+
+https://ckeditor.com/docs/ckeditor5/latest/framework/guides/deep-dive/clipboard.html#paste-as-plain-text-plugin-example
+
+https://ckeditor.com/docs/ckeditor5/latest/features/ui-language.html
+https://github.com/ckeditor/ckeditor5/issues/1151
+https://github.com/abedi-ir/ckeditor5-direction/
+
+test language change
+ClassicEditor
+    .create( document.querySelector( '#editor' ), {
+        // The language code is defined in the https://en.wikipedia.org/wiki/ISO_639-1 standard.
+        language: 'es'
+    } )
+    .then( editor => {
+        console.log( editor );
+    } )
+    .catch( error => {
+        console.error( error );
+    } );
+*/
 
 // Editor configuration.
 BalloonEditor.defaultConfig = {
+	alignment: {
+		options: [ 'left', 'right' ]
+	},
 	toolbar: {
 		items: [
 			'heading',
 			'|',
 			'bold',
 			'italic',
+			'strikethrough',
 			'link',
 			'bulletedList',
 			'numberedList',
 			'|',
-			'indent',
-			'outdent',
-			'|',
 			'imageUpload',
+			'insertImage',
 			'blockQuote',
 			'insertTable',
 			'mediaEmbed',
 			'undo',
-			'redo'
+			'redo',
+			'codeBlock'
 		]
 	},
 	image: {
@@ -87,7 +164,9 @@ BalloonEditor.defaultConfig = {
 			'imageStyle:full',
 			'imageStyle:side',
 			'|',
-			'imageTextAlternative'
+			'imageTextAlternative',
+			'|',
+			'linkImage'
 		]
 	},
 	table: {
