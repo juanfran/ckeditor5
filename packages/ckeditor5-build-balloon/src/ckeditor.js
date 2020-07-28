@@ -16,7 +16,6 @@ import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
 import EasyImage from '@ckeditor/ckeditor5-easy-image/src/easyimage';
 import Heading from '@ckeditor/ckeditor5-heading/src/heading';
 import Image from '@ckeditor/ckeditor5-image/src/image';
-import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
 import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
 import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
 import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
@@ -24,7 +23,6 @@ import LinkImage from '@ckeditor/ckeditor5-link/src/linkimage';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent';
 import Link from '@ckeditor/ckeditor5-link/src/link';
 import List from '@ckeditor/ckeditor5-list/src/list';
-// import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
 import Table from '@ckeditor/ckeditor5-table/src/table';
@@ -35,6 +33,7 @@ import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
 import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
 import GFMDataProcessor from '@ckeditor/ckeditor5-markdown-gfm/src/gfmdataprocessor';
 import Mention from '@ckeditor/ckeditor5-mention/src/mention';
+import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
 
 import InsertImage from '../plugins/insert-image';
 import MentionCustomization from '../plugins/mention-customization';
@@ -60,7 +59,6 @@ BalloonEditor.builtinPlugins = [
 	EasyImage,
 	Heading,
 	Image,
-	ImageCaption,
 	ImageStyle,
 	ImageToolbar,
 	ImageUpload,
@@ -69,8 +67,6 @@ BalloonEditor.builtinPlugins = [
 	Indent,
 	Link,
 	List,
-	// doesn't work with markdown
-	// MediaEmbed,
 	Paragraph,
 	PasteFromOffice,
 	Table,
@@ -79,6 +75,7 @@ BalloonEditor.builtinPlugins = [
 	CodeBlock,
 	Mention,
 	MentionCustomization,
+	RemoveFormat,
 	Markdown
 ];
 
@@ -106,14 +103,17 @@ ordered list [x]
 unordered list [x]
 header 1,2,3 [x]
 blockquote [x]
+image link [x]
+image upload [x]
+remove formating [x]
+code [x]
+mentions [x]
+references [x]
+link wiki [o] - the current wysiwyg doesn't have wiki link
+emoji [o] - require work
 
-image link [x](todo: new modal and icon)
-image upload
-remove formating
-code
 rtl (right to left)
-mentions (https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html)
-references
+
 wiki links An [example](wiki-page-name-in-slug-format "Page") of wiki link
 An [[example-one]] or [[example-two|Example 2]] of wiki links.
 emoticonos An example emoticon :smile:
@@ -123,7 +123,7 @@ internationalization
 change language
 tema
 
-makrdown
+markdown
 marked
 showdown
 https://github.com/ckeditor/ckeditor5/issues/2314
@@ -171,14 +171,12 @@ BalloonEditor.defaultConfig = {
 			'insertTable',
 			'undo',
 			'redo',
-			'codeBlock'
+			'codeBlock',
+			'removeFormat'
 		]
 	},
 	image: {
 		toolbar: [
-			'imageStyle:full',
-			'imageStyle:side',
-			'|',
 			'imageTextAlternative',
 			'|',
 			'linkImage'
