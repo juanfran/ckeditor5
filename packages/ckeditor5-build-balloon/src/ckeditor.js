@@ -37,11 +37,25 @@ import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
 
 import InsertImage from '../plugins/insert-image';
 import MentionCustomization from '../plugins/mention-customization';
+import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters';
+
+import emojiList from 'emojis-list';
+import emojiKeywords from 'emojis-keywords';
 
 // editor.getData();
 // Simple plugin which loads the data processor.
 function Markdown(editor) {
 	editor.data.processor = new GFMDataProcessor(editor.editing.view.document);
+}
+
+function SpecialCharactersEmoji(editor) {
+    editor.plugins.get('SpecialCharacters').addItems( 'Emoji', [
+        { title: 'smiley face', character: emojiList[0] },
+        { title: 'rocket', character: emojiList[1] },
+        { title: 'wind blowing face', character: '🌬️' },
+        { title: 'floppy disk', character: '💾' },
+        { title: 'heart', character: '❤️' }
+    ] );
 }
 
 export default class BalloonEditor extends BalloonEditorBase {}
@@ -76,6 +90,8 @@ BalloonEditor.builtinPlugins = [
 	Mention,
 	MentionCustomization,
 	RemoveFormat,
+	SpecialCharacters,
+	SpecialCharactersEmoji,
 	Markdown
 ];
 
@@ -169,10 +185,12 @@ BalloonEditor.defaultConfig = {
 			'insertImage',
 			'blockQuote',
 			'insertTable',
+			'codeBlock',
+			'specialCharacters',
+			'removeFormat',
+			'|',
 			'undo',
 			'redo',
-			'codeBlock',
-			'removeFormat'
 		]
 	},
 	image: {
@@ -189,6 +207,25 @@ BalloonEditor.defaultConfig = {
 			'mergeTableCells'
 		]
 	},
+	mention: {
+        feeds: [
+          {
+            marker: ':',
+            feed: (search) => {
+				console.log(search);
+				return new Promise((resolve) => {
+					const emojis = emojiKeywords
+					.filter((emoji) => emoji.indexOf(search) !== -1)
+					.map((emoji) => {
+						return {id: emoji};
+					})
+					.slice(0, 10);
+					resolve(emojis);
+				});
+			},
+          },
+        ],
+    },
 	// This value must be kept in sync with the language defined in webpack.config.js.
 	language: 'en'
 };
