@@ -34,8 +34,10 @@ import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformatio
 import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
 import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
 import GFMDataProcessor from '@ckeditor/ckeditor5-markdown-gfm/src/gfmdataprocessor';
+import Mention from '@ckeditor/ckeditor5-mention/src/mention';
 
 import InsertImage from '../plugins/insert-image';
+import MentionCustomization from '../plugins/mention-customization';
 
 // editor.getData();
 // Simple plugin which loads the data processor.
@@ -75,8 +77,25 @@ BalloonEditor.builtinPlugins = [
 	TableToolbar,
  	TextTransformation,
 	CodeBlock,
+	Mention,
+	MentionCustomization,
 	Markdown
 ];
+
+/*
+Reading
+
+Custom builds - https://ckeditor.com/docs/ckeditor5/latest/builds/guides/development/custom-builds.html
+Mentions - https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html
+Theme customization - https://ckeditor.com/docs/ckeditor5/latest/framework/guides/deep-dive/ui/theme-customization.html
+Image link - https://ckeditor.com/docs/ckeditor5/latest/framework/guides/creating-simple-plugin.html#step-4-inserting-a-new-image
+			 https://github.com/ckeditor/ckeditor5/issues/5161
+			 https://github.com/ckeditor/ckeditor5/issues/702
+Code blocks - https://ckeditor.com/docs/ckeditor5/latest/features/code-blocks.html
+
+Debug: https://ckeditor.com/docs/ckeditor5/latest/framework/guides/development-tools.html#ckeditor-5-inspector
+*/
+
 
 /*
 bold [x]
@@ -88,11 +107,18 @@ unordered list [x]
 header 1,2,3 [x]
 blockquote [x]
 
-image link [x](popup feo, icono repetido)
+image link [x](todo: new modal and icon)
 image upload
 remove formating
 code
 rtl (right to left)
+mentions (https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html)
+references
+wiki links An [example](wiki-page-name-in-slug-format "Page") of wiki link
+An [[example-one]] or [[example-two|Example 2]] of wiki links.
+emoticonos An example emoticon :smile:
+attchment with token
+internationalization
 
 change language
 tema
@@ -102,16 +128,6 @@ marked
 showdown
 https://github.com/ckeditor/ckeditor5/issues/2314
 
-
-Insert image via URL
-https://github.com/ckeditor/ckeditor5/issues/5161
-https://ckeditor.com/docs/ckeditor5/latest/framework/guides/creating-simple-plugin.html#step-4-inserting-a-new-image
-https://github.com/ckeditor/ckeditor5/issues/702
-
-https://ckeditor.com/docs/ckeditor5/latest/builds/guides/development/custom-builds.html
-https://ckeditor.com/docs/ckeditor5/latest/framework/guides/deep-dive/ui/theme-customization.html
-
-https://ckeditor.com/docs/ckeditor5/latest/features/code-blocks.html
 
 https://ckeditor.com/docs/ckeditor5/latest/framework/guides/deep-dive/clipboard.html#paste-as-plain-text-plugin-example
 
@@ -153,7 +169,6 @@ BalloonEditor.defaultConfig = {
 			'insertImage',
 			'blockQuote',
 			'insertTable',
-			'mediaEmbed',
 			'undo',
 			'redo',
 			'codeBlock'
