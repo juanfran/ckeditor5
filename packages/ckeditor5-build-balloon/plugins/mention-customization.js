@@ -38,15 +38,25 @@ export default class MentionCustomization extends Plugin {
 					return;
 				}
 
-				const attrElement = viewWriter.createAttributeElement('a', {
-					class: 'mention',
-					'href': modelAttributeValue.link
-				}, {
-					priority: 20,
-					id: modelAttributeValue.uid
-				});
+				console.log(modelAttributeValue);
 
-				return attrElement;
+				if (modelAttributeValue.id.startsWith(':')) {
+					return viewWriter.createAttributeElement('span', {
+						class: 'mention',
+					}, {
+						priority: 20,
+						id: modelAttributeValue.uid
+					});
+				} else {
+					return viewWriter.createAttributeElement('a', {
+						class: 'mention',
+						'href': modelAttributeValue.link
+					}, {
+						priority: 20,
+						id: modelAttributeValue.uid
+					});
+				}
+
 			},
 			converterPriority: 'high'
 		});
@@ -63,6 +73,6 @@ export default class MentionCustomization extends Plugin {
 	}
 
 	isMentionLink( node ) {
-		return node.is('attributeElement') && node.hasClass('mention');
+		return node.is('attributeElement') && node.hasClass('mention') && node.getAttribute('href');
 	}
 }

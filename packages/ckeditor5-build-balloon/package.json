@@ -52,8 +52,6 @@
     "@ckeditor/ckeditor5-table": "^20.0.0",
     "@ckeditor/ckeditor5-theme-lark": "^20.0.0",
     "@ckeditor/ckeditor5-typing": "^20.0.0",
-    "emojis-keywords": "^2.0.0",
-    "emojis-list": "^3.0.0",
     "postcss-loader": "^3.0.0",
     "raw-loader": "^4.0.1",
     "style-loader": "^1.2.1",
