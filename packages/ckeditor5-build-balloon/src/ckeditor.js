@@ -37,13 +37,14 @@ import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
 
 import InsertImage from '../plugins/insert-image';
 import MentionCustomization from '../plugins/mention-customization';
-import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters';
 
 // editor.getData();
 // Simple plugin which loads the data processor.
 function Markdown(editor) {
 	editor.data.processor = new GFMDataProcessor(editor.editing.view.document);
 }
+
+import '../theme/styles.css'
 
 export default class BalloonEditor extends BalloonEditorBase {}
 
@@ -92,6 +93,8 @@ Image link - https://ckeditor.com/docs/ckeditor5/latest/framework/guides/creatin
 Code blocks - https://ckeditor.com/docs/ckeditor5/latest/features/code-blocks.html
 
 Debug: https://ckeditor.com/docs/ckeditor5/latest/framework/guides/development-tools.html#ckeditor-5-inspector
+
+Language: https://ckeditor.com/docs/ckeditor5/latest/features/ui-language.html
 */
 
 
@@ -110,44 +113,21 @@ remove formating [x]
 code [x]
 mentions [x]
 references [x]
+emoji [x]
+upload [x]
+custom theme [x] - only in custom build
+internationalization [o] - rtl works but we have to integrage language change and plugin translations.
+upload file []
+real data []
+markdown []
+real-component []
+code hightlight [o] - we can't change ckeditor html
 link wiki [o] - the current wysiwyg doesn't have wiki link
-emoji [o] - require work
-
-rtl (right to left)
-
-wiki links An [example](wiki-page-name-in-slug-format "Page") of wiki link
-An [[example-one]] or [[example-two|Example 2]] of wiki links.
-emoticonos An example emoticon :smile:
-attchment with token
-internationalization
-
-change language
-tema
 
 markdown
 marked
 showdown
 https://github.com/ckeditor/ckeditor5/issues/2314
-
-
-https://ckeditor.com/docs/ckeditor5/latest/framework/guides/deep-dive/clipboard.html#paste-as-plain-text-plugin-example
-
-https://ckeditor.com/docs/ckeditor5/latest/features/ui-language.html
-https://github.com/ckeditor/ckeditor5/issues/1151
-https://github.com/abedi-ir/ckeditor5-direction/
-
-test language change
-ClassicEditor
-    .create( document.querySelector( '#editor' ), {
-        // The language code is defined in the https://en.wikipedia.org/wiki/ISO_639-1 standard.
-        language: 'es'
-    } )
-    .then( editor => {
-        console.log( editor );
-    } )
-    .catch( error => {
-        console.error( error );
-    } );
 */
 
 // Editor configuration.

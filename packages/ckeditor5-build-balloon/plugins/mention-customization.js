@@ -34,11 +34,9 @@ export default class MentionCustomization extends Plugin {
 		editor.conversion.for('downcast').attributeToElement({
 			model: 'mention',
 			view: (modelAttributeValue, viewWriter) => {
-				if (!modelAttributeValue) {
+				if (!modelAttributeValue || !modelAttributeValue.id) {
 					return;
 				}
-
-				console.log(modelAttributeValue);
 
 				if (modelAttributeValue.id.startsWith(':')) {
 					return viewWriter.createAttributeElement('span', {
@@ -72,7 +70,7 @@ export default class MentionCustomization extends Plugin {
 		});
 	}
 
-	isMentionLink( node ) {
+	isMentionLink(node) {
 		return node.is('attributeElement') && node.hasClass('mention') && node.getAttribute('href');
 	}
 }

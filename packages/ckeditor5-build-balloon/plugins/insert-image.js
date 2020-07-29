@@ -20,7 +20,7 @@ export default class InsertImage extends Plugin {
 
 			// todo: i18n
             view.on('execute', () => {
-                const imageUrl = prompt(t('Image URL'));
+                const imageUrl = prompt(t('Insert image'));
 
                 editor.model.change(writer => {
                     const imageElement = writer.createElement('image', {
