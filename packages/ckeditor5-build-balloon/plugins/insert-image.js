@@ -8,7 +8,7 @@ export default class InsertImage extends Plugin {
         const editor = this.editor;
 
         editor.ui.componentFactory.add('insertImage', locale => {
-            const view = new ButtonView( locale );
+            const view = new ButtonView(locale);
 			const t = this.editor.t;
 
             view.set({
@@ -25,7 +25,7 @@ export default class InsertImage extends Plugin {
                 editor.model.change(writer => {
                     const imageElement = writer.createElement('image', {
                         src: imageUrl
-                    } );
+                    });
 
                     editor.model.insertContent(imageElement, editor.model.document.selection);
                 });

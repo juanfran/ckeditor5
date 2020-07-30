@@ -37,6 +37,7 @@ import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
 
 import InsertImage from '../plugins/insert-image';
 import MentionCustomization from '../plugins/mention-customization';
+import AttachFile from '../plugins/attach-file';
 
 // editor.getData();
 // Simple plugin which loads the data processor.
@@ -78,6 +79,7 @@ BalloonEditor.builtinPlugins = [
 	Mention,
 	MentionCustomization,
 	RemoveFormat,
+	AttachFile,
 	Markdown
 ];
 
@@ -114,7 +116,6 @@ code [x]
 mentions [x]
 references [x]
 emoji [x]
-upload [x]
 custom theme [x] - only in custom build
 internationalization [o] - rtl works but we have to integrage language change and plugin translations.
 upload file []
