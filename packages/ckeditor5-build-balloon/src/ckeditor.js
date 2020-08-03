@@ -31,19 +31,16 @@ import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformatio
 
 import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
 import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
-import GFMDataProcessor from '@ckeditor/ckeditor5-markdown-gfm/src/gfmdataprocessor';
 import Mention from '@ckeditor/ckeditor5-mention/src/mention';
 import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
+
+import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 
 import InsertImage from '../plugins/insert-image';
 import MentionCustomization from '../plugins/mention-customization';
 import AttachFile from '../plugins/attach-file';
 
 // editor.getData();
-// Simple plugin which loads the data processor.
-function Markdown(editor) {
-	editor.data.processor = new GFMDataProcessor(editor.editing.view.document);
-}
 
 import '../theme/styles.css'
 
@@ -80,7 +77,7 @@ BalloonEditor.builtinPlugins = [
 	MentionCustomization,
 	RemoveFormat,
 	AttachFile,
-	Markdown
+	TodoList,
 ];
 
 /*
@@ -101,34 +98,40 @@ Language: https://ckeditor.com/docs/ckeditor5/latest/features/ui-language.html
 
 
 /*
-bold [x]
-italic [x]
-strike through [x]
-link [x]
-ordered list [x]
-unordered list [x]
-header 1,2,3 [x]
-blockquote [x]
-image link [x]
-image upload [x]
-remove formating [x]
-code [x]
-mentions [x]
-references [x]
-emoji [x]
+bold [x][x]
+italic [x][x]
+strike through [x][x]
+task list [x][X]
+link [x][x]
+ordered list [x][x]
+unordered list [x][x]
+header 1,2,3 [x][x]
+table [x][x]
+blockquote [x][x]
+image link [x][x]
+image upload [x][x]
+remove formating [x][x]
+code [x][x]
+mentions [x][x]
+references [x][x]
+emoji [x][x]
 custom theme [x] - only in custom build
+upload file [x]
 internationalization [o] - rtl works but we have to integrage language change and plugin translations.
-upload file []
-real data []
-markdown []
-real-component []
+markdown [x]
 code hightlight [o] - we can't change ckeditor html
 link wiki [o] - the current wysiwyg doesn't have wiki link
+real-component []
+real data []
 
 markdown
 marked
 showdown
 https://github.com/ckeditor/ckeditor5/issues/2314
+
+// TODO
+// https://github.com/taigaio/taiga-front/issues/1859
+
 */
 
 // Editor configuration.
@@ -146,6 +149,7 @@ BalloonEditor.defaultConfig = {
 			'link',
 			'bulletedList',
 			'numberedList',
+			'todoList',
 			'|',
 			'imageUpload',
 			'insertImage',
