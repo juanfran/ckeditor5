@@ -40,8 +40,6 @@ import InsertImage from '../plugins/insert-image';
 import MentionCustomization from '../plugins/mention-customization';
 import AttachFile from '../plugins/attach-file';
 
-// editor.getData();
-
 import '../theme/styles.css'
 
 export default class BalloonEditor extends BalloonEditorBase {}
@@ -79,60 +77,6 @@ BalloonEditor.builtinPlugins = [
 	AttachFile,
 	TodoList,
 ];
-
-/*
-Reading
-
-Custom builds - https://ckeditor.com/docs/ckeditor5/latest/builds/guides/development/custom-builds.html
-Mentions - https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html
-Theme customization - https://ckeditor.com/docs/ckeditor5/latest/framework/guides/deep-dive/ui/theme-customization.html
-Image link - https://ckeditor.com/docs/ckeditor5/latest/framework/guides/creating-simple-plugin.html#step-4-inserting-a-new-image
-			 https://github.com/ckeditor/ckeditor5/issues/5161
-			 https://github.com/ckeditor/ckeditor5/issues/702
-Code blocks - https://ckeditor.com/docs/ckeditor5/latest/features/code-blocks.html
-
-Debug: https://ckeditor.com/docs/ckeditor5/latest/framework/guides/development-tools.html#ckeditor-5-inspector
-
-Language: https://ckeditor.com/docs/ckeditor5/latest/features/ui-language.html
-*/
-
-
-/*
-bold [x][x]
-italic [x][x]
-strike through [x][x]
-task list [x][X]
-link [x][x]
-ordered list [x][x]
-unordered list [x][x]
-header 1,2,3 [x][x]
-table [x][x]
-blockquote [x][x]
-image link [x][x]
-image upload [x][x]
-remove formating [x][x]
-code [x][x]
-mentions [x][x]
-references [x][x]
-emoji [x][x]
-custom theme [x] - only in custom build
-upload file [x]
-internationalization [o] - rtl works but we have to integrage language change and plugin translations.
-markdown [x]
-code hightlight [o] - we can't change ckeditor html
-link wiki [o] - the current wysiwyg doesn't have wiki link
-real-component []
-real data []
-
-markdown
-marked
-showdown
-https://github.com/ckeditor/ckeditor5/issues/2314
-
-// TODO
-// https://github.com/taigaio/taiga-front/issues/1859
-
-*/
 
 // Editor configuration.
 BalloonEditor.defaultConfig = {
@@ -173,7 +117,6 @@ BalloonEditor.defaultConfig = {
 		contentToolbar: [
 			'tableColumn',
 			'tableRow',
-			'mergeTableCells'
 		]
 	},
 	// This value must be kept in sync with the language defined in webpack.config.js.
